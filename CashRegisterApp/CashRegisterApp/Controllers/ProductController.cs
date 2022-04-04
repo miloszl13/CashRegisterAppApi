@@ -33,5 +33,12 @@ namespace CashRegisterApp.Controllers
             var createProduct = _productService.Create(productViewModel);
             return createProduct;
         }
+        //update existing  product
+        [HttpPut("UpdateProduct")]
+        public ActionResult<bool> EditProduct([FromBody] ProductViewModel productViewModel)
+        {
+            var UpdatedProduct = _productService.Update(productViewModel);
+            return UpdatedProduct;
+        }
     }
 }

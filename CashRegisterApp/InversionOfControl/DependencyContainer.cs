@@ -30,7 +30,7 @@ namespace InversionOfControl
             services.AddScoped<IRequestHandler<CreateBillCommand, bool>, BillCreateCommandHandler>();
             services.AddScoped<IRequestHandler<UpdateBillCommand, bool>, BillUpdateCommandHandler>();
             services.AddScoped<IRequestHandler<CreateProductCommand, bool>, CreateProductCommandHandler>();
-
+            services.AddScoped<IRequestHandler<UpdateProductCommand, bool>, UpdateProductCommandHandler>();
             //Application layer
             services.AddScoped<IBillService, BillService>();
             services.AddScoped<IProductService, ProductService>();

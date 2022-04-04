@@ -13,6 +13,7 @@ namespace ApplicationLayer.Interfaces
         ActionResult<List<ProductViewModel>> GetProducts();
         ActionResult<bool> Delete(int id);
         ActionResult<bool> Create(ProductViewModel productViewModel);
+        ActionResult<bool> Update(ProductViewModel productViewModel);
 
     }
 }

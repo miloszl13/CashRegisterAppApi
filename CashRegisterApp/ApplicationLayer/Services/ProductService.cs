@@ -86,5 +86,27 @@ namespace ApplicationLayer.Services
             }
             return true;
         }
+        public ActionResult<bool> Update(ProductViewModel productViewModel)
+        {
+            var updateProductCommand = new UpdateProductCommand(
+                productViewModel.Product_id,
+                productViewModel.Name,
+                productViewModel.Cost
+                );
+            var Task = _bus.SendCommand(updateProductCommand);
+            if (Task == Task.FromResult(false))
+            {
+                var errorResponse = new ErrorResponseModel()
+                {
+                    ErrorMessage = ProductErrorMessages.product_doesnt_exist,
+                    StatusCode = System.Net.HttpStatusCode.NotFound
+                };
+                return new NotFoundObjectResult(errorResponse);
+            }
+            return true;
+
+
+        }
+
     }
 }
