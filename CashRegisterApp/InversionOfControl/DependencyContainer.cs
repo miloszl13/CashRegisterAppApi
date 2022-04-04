@@ -34,10 +34,14 @@ namespace InversionOfControl
             //Application layer
             services.AddScoped<IBillService, BillService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IBillProductService, BillProductService>();
+
             //InfraData Layer
             services.AddScoped<IBillRepository, BillRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
-    
+            services.AddScoped<IBillProductRepository, BillProductRepository>();
+
+
             services.AddScoped<BillsDbContext>();
         }
     }
