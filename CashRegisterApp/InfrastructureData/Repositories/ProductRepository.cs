@@ -24,5 +24,10 @@ namespace InfrastructureData.Repositories
             _db.Remove(product);
             _db.SaveChanges();
         }
+        public void Add(Product product)
+        {
+            _db.Add(product);
+            _db.SaveChanges();
+        }
     }
 }

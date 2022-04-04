@@ -1,8 +1,10 @@
 ﻿using ApplicationLayer.Interfaces;
 using ApplicationLayer.Model;
 using ApplicationLayer.ViewModels;
+using Domain.Commands.ProductCommands;
 using Domain.ErrorMessages;
 using Domain.Interfaces;
+using DomainCore.Bus;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,9 +17,11 @@ namespace ApplicationLayer.Services
     public class ProductService:IProductService
     {
         private readonly IProductRepository _productRepository;
-        public ProductService(IProductRepository productRepository)
+        private readonly IMediatorHandler _bus;
+        public ProductService(IProductRepository productRepository,IMediatorHandler mediatorHandler)
         {
             _productRepository = productRepository;
+            _bus = mediatorHandler;
          
         }
         public ActionResult<List<ProductViewModel>> GetProducts()
@@ -61,6 +65,26 @@ namespace ApplicationLayer.Services
             return true;
 
 
+        }
+
+        public ActionResult<bool> Create(ProductViewModel productViewModel)
+        {
+            var createProductCommand = new CreateProductCommand(
+                productViewModel.Product_id,
+                productViewModel.Name,
+                productViewModel.Cost
+                );
+            var Task = _bus.SendCommand(createProductCommand);
+            if (Task == Task.FromResult(false))
+            {
+                var errorResponse = new ErrorResponseModel()
+                {
+                    ErrorMessage = ProductErrorMessages.product_already_exist,
+                    StatusCode = System.Net.HttpStatusCode.BadRequest
+                };
+                return new BadRequestObjectResult(errorResponse);
+            }
+            return true;
         }
     }
 }

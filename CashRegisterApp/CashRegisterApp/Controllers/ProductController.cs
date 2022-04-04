@@ -27,5 +27,11 @@ namespace CashRegisterApp.Controllers
             var deleteProduct = _productService.Delete(id);
             return deleteProduct;
         }
+        [HttpPost("CreateProducts")]
+        public ActionResult<bool> Create([FromBody] ProductViewModel productViewModel)
+        {
+            var createProduct = _productService.Create(productViewModel);
+            return createProduct;
+        }
     }
 }
