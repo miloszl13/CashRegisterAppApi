@@ -11,6 +11,7 @@ namespace Domain.ErrorMessages
         public const string empty_bills_db = "There are no bills in database!";
         public const string bill_already_exist = "Bill with that Bill_number already exist!";
         public const string bill_not_exist = "Bill with that Bill_number does not exist!";
+        public const string OverCostLimit = "You cant add more products to bill because total cost is limitet to 20000";
 
     }
 }
