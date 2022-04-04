@@ -1,0 +1,24 @@
+﻿using ApplicationLayer.Interfaces;
+using ApplicationLayer.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+
+namespace CashRegisterApp.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class BillController : ControllerBase
+    {
+        private readonly IBillService _billService;
+        public BillController(IBillService billService)
+        {
+            _billService=billService;
+        }
+        //get all bills
+        [HttpGet("GetAllBills")]
+        public ActionResult<List<BillViewModel>> GetBills()
+        {
+            var BillsFromDb = _billService.GetBills();
+            return BillsFromDb;
+        }
+    }
+}

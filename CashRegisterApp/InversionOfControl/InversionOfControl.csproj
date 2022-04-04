@@ -10,4 +10,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ApplicationLayer\ApplicationLayer.csproj" />
+    <ProjectReference Include="..\InfrastructureData\InfrastructureData.csproj" />
+  </ItemGroup>
+
 </Project>
