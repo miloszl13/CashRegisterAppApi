@@ -20,5 +20,16 @@ namespace InfrastructureData.Repositories
         {
             return _db.BillProducts;
         }
+        public void Add(BillProduct billproduct)
+        {
+
+            _db.Add(billproduct);
+            _db.SaveChanges();
+        }
+        public void Update(BillProduct billProduct)
+        {
+            _db.Update(billProduct);
+            _db.SaveChanges();
+        }
     }
 }
