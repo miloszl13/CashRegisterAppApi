@@ -20,5 +20,12 @@ namespace CashRegisterApp.Controllers
             var productsDb = _productService.GetProducts();
             return productsDb;
         }
+
+        [HttpDelete("DeleteProduct/{id:int}")]
+        public ActionResult<bool> Delete([FromRoute] int id)
+        {
+            var deleteProduct = _productService.Delete(id);
+            return deleteProduct;
+        }
     }
 }

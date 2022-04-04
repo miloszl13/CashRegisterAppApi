@@ -9,6 +9,7 @@ namespace Domain.Interfaces
     public interface IProductRepository
     {
         IEnumerable<Product> GetProducts();
+        void Delete(Product product);
 
     }
 }

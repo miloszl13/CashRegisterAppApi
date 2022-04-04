@@ -44,5 +44,23 @@ namespace ApplicationLayer.Services
             }
             return result;
         }
+        public ActionResult<bool> Delete(int id)
+        {
+
+            var product = _productRepository.GetProducts().FirstOrDefault(x => x.Product_Id == id);
+            if (product == null)
+            {
+                var errorResponse = new ErrorResponseModel()
+                {
+                    ErrorMessage = ProductErrorMessages.product_doesnt_exist,
+                    StatusCode = System.Net.HttpStatusCode.NotFound
+                };
+                return new NotFoundObjectResult(errorResponse);
+            }
+            _productRepository.Delete(product);
+            return true;
+
+
+        }
     }
 }

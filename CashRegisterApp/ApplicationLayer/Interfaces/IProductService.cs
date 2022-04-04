@@ -11,6 +11,6 @@ namespace ApplicationLayer.Interfaces
     public interface IProductService
     {
         ActionResult<List<ProductViewModel>> GetProducts();
-
+        ActionResult<bool> Delete(int id);
     }
 }
