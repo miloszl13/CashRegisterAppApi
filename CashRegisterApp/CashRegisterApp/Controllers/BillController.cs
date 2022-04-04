@@ -20,5 +20,12 @@ namespace CashRegisterApp.Controllers
             var BillsFromDb = _billService.GetBills();
             return BillsFromDb;
         }
+        //Create new bill
+        [HttpPost("CreateNewBill")]
+        public ActionResult<bool> CreateBill([FromBody] BillViewModel billViewModel)
+        {
+            var CreatedBill = _billService.Create(billViewModel);
+            return CreatedBill;
+        }
     }
 }

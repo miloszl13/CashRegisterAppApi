@@ -2,8 +2,10 @@
 using ApplicationLayer.Model;
 using ApplicationLayer.ViewModels;
 using Domain;
+using Domain.Commands.BillCommands;
 using Domain.ErrorMessages;
 using Domain.Interfaces;
+using DomainCore.Bus;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -16,9 +18,12 @@ namespace ApplicationLayer.Services
     public class BillService:IBillService
     {
         private readonly IBillRepository _billRepository;
-        public BillService(IBillRepository billRepository)
+        private readonly IMediatorHandler _bus;
+
+        public BillService(IBillRepository billRepository,IMediatorHandler mediatorHandler)
         {
             _billRepository = billRepository;
+            _bus = mediatorHandler;
         }
         public ActionResult<List<BillViewModel>> GetBills()
         {
@@ -60,6 +65,24 @@ namespace ApplicationLayer.Services
                     
             }
             return result;
+        }
+        public ActionResult<bool> Create(BillViewModel billViewModel)
+        {
+            var createBillCommand = new CreateBillCommand(
+                billViewModel.Bill_number,
+                billViewModel.Total_cost,
+                billViewModel.Credit_card);
+            var Task = _bus.SendCommand(createBillCommand);
+            if (Task == Task.FromResult(false))
+            {
+                var errorResponse = new ErrorResponseModel()
+                {
+                    ErrorMessage = BillErrorMessages.bill_already_exist,
+                    StatusCode = System.Net.HttpStatusCode.BadRequest
+                };
+                return new BadRequestObjectResult(errorResponse);
+            }
+            return true;
         }
     }
 }

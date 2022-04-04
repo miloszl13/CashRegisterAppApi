@@ -21,5 +21,11 @@ namespace InfrastructureData.Repositories
         {
             return _db.Bills.Include(x => x.Bill_Products);
         }
+        //add new bill
+        public void Add(Bill bill)
+        {
+            _db.Add(bill);
+            _db.SaveChanges();
+        }
     }
 }

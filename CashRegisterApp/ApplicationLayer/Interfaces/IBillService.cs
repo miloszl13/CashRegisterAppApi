@@ -11,5 +11,7 @@ namespace ApplicationLayer.Interfaces
     public interface IBillService
     {
         ActionResult<List<BillViewModel>> GetBills();
+        ActionResult<bool> Create(BillViewModel billViewModel);
+
     }
 }

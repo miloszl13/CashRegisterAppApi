@@ -9,6 +9,6 @@ namespace Domain.Interfaces
     public interface IBillRepository
     {
         IEnumerable<Bill> GetBills();
-
+        void Add(Bill bill);
     }
 }

@@ -1,8 +1,13 @@
 ﻿using ApplicationLayer.Interfaces;
 using ApplicationLayer.Services;
+using Domain.CommandHandlers.BillCommandHandlers;
+using Domain.Commands.BillCommands;
 using Domain.Interfaces;
+using DomainCore.Bus;
+using InfraBus;
 using InfrastructureData;
 using InfrastructureData.Repositories;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -16,6 +21,11 @@ namespace InversionOfControl
     {
         public static void RegisterServices(IServiceCollection services)
         {
+            //Domain InMemoryBus MediatR
+            services.AddScoped<IMediatorHandler, InMemoryBus>();
+
+            //Domain Handlers
+            services.AddScoped<IRequestHandler<CreateBillCommand, bool>, BillCreateCommandHandler>();
             //Application layer
             services.AddScoped<IBillService, BillService>();
             

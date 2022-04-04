@@ -1,5 +1,6 @@
 using InfrastructureData;
 using InversionOfControl;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +19,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<BillsDbContext>(options => options.UseNpgsql(
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
+builder.Services.AddMediatR(typeof(Program));
 RegisterService(builder.Services);
 
 var app = builder.Build();
