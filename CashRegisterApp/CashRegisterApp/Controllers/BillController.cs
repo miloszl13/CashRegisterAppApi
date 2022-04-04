@@ -34,5 +34,12 @@ namespace CashRegisterApp.Controllers
             var UpdatedBill = _billService.Update(bill);
             return UpdatedBill;
         }
+        //delelete bill by id
+        [HttpDelete("delete/{id}")]
+        public ActionResult<bool> DeleteBill([FromRoute] string id)
+        {
+            var deletedBill = _billService.Delete(id);
+            return deletedBill;
+        }
     }
 }

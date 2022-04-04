@@ -104,5 +104,26 @@ namespace ApplicationLayer.Services
 
 
         }
+        //DELETE BILL FROM DB
+        public ActionResult<bool> Delete(string id)
+        {
+
+            var billfromdb = _billRepository.GetBills().FirstOrDefault(x => x.Bill_number == id);
+            if (billfromdb == null)
+            {
+                var errorResponse = new ErrorResponseModel()
+                {
+                    ErrorMessage = BillErrorMessages.bill_not_exist,
+                    StatusCode = System.Net.HttpStatusCode.NotFound
+                };
+                return new NotFoundObjectResult(errorResponse);
+            }
+            _billRepository.Delete(billfromdb);
+            return true;
+
+
+        }
+
+
     }
 }
