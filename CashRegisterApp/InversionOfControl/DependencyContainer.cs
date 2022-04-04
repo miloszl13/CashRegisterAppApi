@@ -1,7 +1,9 @@
 ﻿using ApplicationLayer.Interfaces;
 using ApplicationLayer.Services;
 using Domain.CommandHandlers.BillCommandHandlers;
+using Domain.CommandHandlers.ProductCommandHandlers;
 using Domain.Commands.BillCommands;
+using Domain.Commands.ProductCommands;
 using Domain.Interfaces;
 using DomainCore.Bus;
 using InfraBus;
@@ -27,12 +29,14 @@ namespace InversionOfControl
             //Domain Handlers
             services.AddScoped<IRequestHandler<CreateBillCommand, bool>, BillCreateCommandHandler>();
             services.AddScoped<IRequestHandler<UpdateBillCommand, bool>, BillUpdateCommandHandler>();
-
+            services.AddScoped<IRequestHandler<CreateProductCommand, bool>, CreateProductCommandHandler>();
+            services.AddScoped<IRequestHandler<UpdateProductCommand, bool>, UpdateProductCommandHandler>();
             //Application layer
             services.AddScoped<IBillService, BillService>();
-            
+            services.AddScoped<IProductService, ProductService>();
             //InfraData Layer
             services.AddScoped<IBillRepository, BillRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
     
             services.AddScoped<BillsDbContext>();
         }
