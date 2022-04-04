@@ -26,6 +26,8 @@ namespace InversionOfControl
 
             //Domain Handlers
             services.AddScoped<IRequestHandler<CreateBillCommand, bool>, BillCreateCommandHandler>();
+            services.AddScoped<IRequestHandler<UpdateBillCommand, bool>, BillUpdateCommandHandler>();
+
             //Application layer
             services.AddScoped<IBillService, BillService>();
             

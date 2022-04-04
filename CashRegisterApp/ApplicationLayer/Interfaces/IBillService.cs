@@ -12,6 +12,7 @@ namespace ApplicationLayer.Interfaces
     {
         ActionResult<List<BillViewModel>> GetBills();
         ActionResult<bool> Create(BillViewModel billViewModel);
+        ActionResult<bool> Update(BillViewModel billViewModel);
 
     }
 }

@@ -27,5 +27,12 @@ namespace CashRegisterApp.Controllers
             var CreatedBill = _billService.Create(billViewModel);
             return CreatedBill;
         }
+        //update existing  bill
+        [HttpPut("UpdateBill")]
+        public ActionResult<bool> EditBill([FromBody] BillViewModel bill)
+        {
+            var UpdatedBill = _billService.Update(bill);
+            return UpdatedBill;
+        }
     }
 }

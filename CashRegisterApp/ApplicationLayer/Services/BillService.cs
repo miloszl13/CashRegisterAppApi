@@ -84,5 +84,25 @@ namespace ApplicationLayer.Services
             }
             return true;
         }
+        public ActionResult<bool> Update(BillViewModel billViewModel)
+        {
+            var updateBillCommand = new UpdateBillCommand(
+                billViewModel.Bill_number,
+                billViewModel.Total_cost,
+                billViewModel.Credit_card);
+            var Task = _bus.SendCommand(updateBillCommand);
+            if (Task == Task.FromResult(false))
+            {
+                var errorResponse = new ErrorResponseModel()
+                {
+                    ErrorMessage = BillErrorMessages.bill_not_exist,
+                    StatusCode = System.Net.HttpStatusCode.NotFound
+                };
+                return new NotFoundObjectResult(errorResponse);
+            }
+            return true;
+
+
+        }
     }
 }
