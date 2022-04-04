@@ -159,6 +159,45 @@ namespace ApplicationLayer.Services
             };
             return result;
         }
+        public ActionResult<BillViewModel> AddCreditCard(string cardNumber, string BillNumber)
+        {
+            var bill = _billRepository.GetBillById(BillNumber);
+            if (bill == null)
+            {
+                var errorResponse = new ErrorResponseModel()
+                {
+                    ErrorMessage = BillErrorMessages.bill_not_exist,
+                    StatusCode = System.Net.HttpStatusCode.NotFound
+                };
+                return new NotFoundObjectResult(errorResponse);
+
+            }
+            bill.Credit_card = cardNumber.ToString();
+            _billRepository.Update(bill, BillNumber);
+
+
+            List<BillProductViewModel> billProducts = new List<BillProductViewModel>();
+            foreach (BillProduct bp in bill.Bill_Products)
+            {
+                billProducts.Add(new BillProductViewModel
+                {
+                    Bill_number = bp.Bill_number,
+                    Product_id = bp.Product_id,
+                    Product_quantity = bp.Product_quantity,
+                    Products_cost = bp.Products_cost
+                });
+            }
+
+            var result = new BillViewModel
+            {
+                Bill_number = bill.Bill_number,
+                Total_cost = bill.Total_cost,
+                Credit_card = bill.Credit_card,
+                Bill_Products = billProducts
+            };
+            return result;
+
+        }
 
     }
 }

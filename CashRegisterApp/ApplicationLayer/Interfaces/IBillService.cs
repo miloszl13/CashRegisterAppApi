@@ -15,6 +15,7 @@ namespace ApplicationLayer.Interfaces
         ActionResult<bool> Update(BillViewModel billViewModel);
         ActionResult<bool> Delete(string id);
         ActionResult<BillViewModel> GetBillById(string id);
+        ActionResult<BillViewModel> AddCreditCard(string cardNumber, string BillNumber);
 
     }
 }

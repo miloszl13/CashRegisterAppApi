@@ -51,5 +51,12 @@ namespace CashRegisterApp.Controllers
             var billFromDb = _billService.GetBillById(id);
             return billFromDb;
         }
+        //CREDIT CARD
+        [HttpPost("AddCreditCardToBill/{Bill_number},{CardNumber}")]
+        public ActionResult<BillViewModel> AddCreditCard([FromRoute] string Bill_number, [FromRoute] string CardNumber)
+        {
+            var creditCard = _billService.AddCreditCard(CardNumber, Bill_number);
+            return creditCard;
+        }
     }
 }
