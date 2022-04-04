@@ -123,5 +123,59 @@ namespace ApplicationLayer.Services
                 return true;
             }
         }
+        public ActionResult<bool> Delete(string Bill_number, int Product_id, int quantity)
+        {
+            //store all billproducts from db
+            List<BillProduct> bill_product = _billProductRepository.GetAllBillProducts().ToList();
+            //find billproduct with given billnumber and product id
+            var billProductdb = bill_product.FirstOrDefault(x => x.Bill_number == Bill_number && x.Product_id == Product_id);
+            if (billProductdb == null)
+            {
+                var errorResponse = new ErrorResponseModel()
+                {
+                    ErrorMessage = BillProductErrorMessages.bill_product_not_exist,
+                    StatusCode = System.Net.HttpStatusCode.NotFound
+                };
+                return new NotFoundObjectResult(errorResponse);
+            }
+
+
+            if (quantity == billProductdb.Product_quantity)
+            {
+                _billrepository.DecreaseTotalCost(billProductdb.Products_cost, billProductdb.Bill_number);
+                _billProductRepository.Delete(billProductdb);
+            }
+            else if (quantity > billProductdb.Product_quantity)
+            {
+                var errorResponse = new ErrorResponseModel()
+                {
+                    ErrorMessage = BillProductErrorMessages.too_many_products,
+                    StatusCode = System.Net.HttpStatusCode.NotFound
+                };
+                return new NotFoundObjectResult(errorResponse);
+
+            }
+            else
+            {
+                var product = _productRepository.GetProducts().FirstOrDefault(x => x.Product_Id == billProductdb.Product_id);
+                if (product == null)
+                {
+                    var errorResponse = new ErrorResponseModel()
+                    {
+                        ErrorMessage = BillProductErrorMessages.bill_product_not_exist,
+                        StatusCode = System.Net.HttpStatusCode.NotFound
+                    };
+                    return new NotFoundObjectResult(errorResponse);
+                }
+                var RightQuantity = billProductdb.Product_quantity - quantity;
+                billProductdb.Product_quantity = RightQuantity;
+                billProductdb.Products_cost = (product.Cost * RightQuantity);
+                _billProductRepository.Update(billProductdb);
+                _billrepository.DecreaseTotalCost((product.Cost * quantity), billProductdb.Bill_number);
+            }
+
+            return true;
+        }
+
     }
 }

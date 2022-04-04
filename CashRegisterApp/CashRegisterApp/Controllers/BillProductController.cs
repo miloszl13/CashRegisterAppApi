@@ -28,5 +28,12 @@ namespace CashRegisterApp.Controllers
             return AddingProduct;
 
         }
+        [HttpDelete("deleteBillProduct/{Bill_number},{Product_id},{quantity}")]
+        public ActionResult<bool> DeleteBillProduct([FromRoute] string Bill_number, [FromRoute] int Product_id, [FromRoute] int quantity)
+        {
+            var DeleteBillProduct = _billProductService.Delete(Bill_number, Product_id, quantity);
+            return DeleteBillProduct;
+        }
+
     }
 }

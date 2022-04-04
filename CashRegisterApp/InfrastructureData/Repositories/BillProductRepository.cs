@@ -31,5 +31,11 @@ namespace InfrastructureData.Repositories
             _db.Update(billProduct);
             _db.SaveChanges();
         }
+        //Delete bill_product
+        public void Delete(BillProduct billproduct)
+        {
+            _db.Remove(billproduct);
+            _db.SaveChanges();
+        }
     }
 }
