@@ -44,5 +44,11 @@ namespace InfrastructureData.Repositories
             _db.Remove(bill);
             _db.SaveChanges();
         }
+        public Bill GetBillById(string id)
+        {
+
+            var bill = _db.Bills.Include(x => x.Bill_Products).FirstOrDefault(x => x.Bill_number == id);
+            return bill;
+        }
     }
 }

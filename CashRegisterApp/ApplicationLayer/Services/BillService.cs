@@ -123,7 +123,42 @@ namespace ApplicationLayer.Services
 
 
         }
+        //GET BILL BY ID
+        public ActionResult<BillViewModel> GetBillById(string id)
+        {
+            var billfromdb = _billRepository.GetBillById(id);
 
+            if (billfromdb == null)
+            {
+                var errorResponse = new ErrorResponseModel()
+                {
+                    ErrorMessage = BillErrorMessages.bill_not_exist,
+                    StatusCode = System.Net.HttpStatusCode.NotFound
+                };
+                return new NotFoundObjectResult(errorResponse);
+            }
+
+
+            List<BillProductViewModel> billProducts = new List<BillProductViewModel>();
+            foreach (BillProduct bp in billfromdb.Bill_Products)
+            {
+                billProducts.Add(new BillProductViewModel
+                {
+                    Bill_number = bp.Bill_number,
+                    Product_id = bp.Product_id,
+                    Product_quantity = bp.Product_quantity,
+                    Products_cost = bp.Products_cost
+                });
+            }
+            var result = new BillViewModel
+            {
+                Bill_number = billfromdb.Bill_number,
+                Total_cost = billfromdb.Total_cost,
+                Credit_card = billfromdb.Credit_card,
+                Bill_Products = billProducts
+            };
+            return result;
+        }
 
     }
 }

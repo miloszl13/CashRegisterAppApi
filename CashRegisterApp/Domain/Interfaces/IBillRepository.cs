@@ -12,6 +12,7 @@ namespace Domain.Interfaces
         void Add(Bill bill);
         void Update(Bill bill, string id);
         void Delete(Bill bill);
+        public Bill GetBillById(string id);
 
     }
 }
