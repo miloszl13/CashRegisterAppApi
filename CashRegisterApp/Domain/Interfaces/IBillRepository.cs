@@ -13,6 +13,7 @@ namespace Domain.Interfaces
         void Update(Bill bill, string id);
         void Delete(Bill bill);
         public Bill GetBillById(string id);
-
+        void IncreaseTotalCost(int? TotalCost, string id);
+        void DecreaseTotalCost(int? TotalCost, string id);
     }
 }

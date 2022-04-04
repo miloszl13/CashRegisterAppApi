@@ -50,5 +50,31 @@ namespace InfrastructureData.Repositories
             var bill = _db.Bills.Include(x => x.Bill_Products).FirstOrDefault(x => x.Bill_number == id);
             return bill;
         }
+        //update bill total cost
+        public void IncreaseTotalCost(int? TotalCost, string id)
+        {
+            var billfromdb = GetBills().FirstOrDefault(x => x.Bill_number == id);
+
+            if (billfromdb != null)
+            {
+                if (billfromdb.Total_cost == null)
+                {
+                    billfromdb.Total_cost = 0;
+                }
+                billfromdb.Total_cost = billfromdb.Total_cost + TotalCost;
+            }
+            _db.SaveChanges();
+        }
+        public void DecreaseTotalCost(int? TotalCost, string id)
+        {
+            var billfromdb = GetBills().FirstOrDefault(x => x.Bill_number == id);
+
+            if (billfromdb != null)
+            {
+
+                billfromdb.Total_cost = billfromdb.Total_cost - TotalCost;
+            }
+            _db.SaveChanges();
+        }
     }
 }
