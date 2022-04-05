@@ -35,7 +35,7 @@ namespace InversionOfControl
             services.AddScoped<IBillService, BillService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IBillProductService, BillProductService>();
-
+            services.AddScoped<ICurrencyExchangeService, CurrencyExchangeService>();
             //InfraData Layer
             services.AddScoped<IBillRepository, BillRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
