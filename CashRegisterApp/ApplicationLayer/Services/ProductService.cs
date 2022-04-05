@@ -42,12 +42,6 @@ namespace ApplicationLayer.Services
             var result = new List<ProductViewModel>();
             foreach (var product in products)
             {
-                //result.Add(new ProductViewModel
-                //{
-                //    Product_id = product.Product_Id,
-                //    Name = product.Name,
-                //    Cost = product.Cost
-                //});
                 result.Add(_autoMapper.Map<ProductViewModel>(product));
 
             }
@@ -74,11 +68,6 @@ namespace ApplicationLayer.Services
 
         public ActionResult<bool> Create(ProductViewModel productViewModel)
         {
-            //var createProductCommand = new CreateProductCommand(
-            //    productViewModel.Product_id,
-            //    productViewModel.Name,
-            //    productViewModel.Cost
-            //    );
             var Task = _bus.SendCommand(_autoMapper.Map<CreateProductCommand>(productViewModel));
             if (Task == Task.FromResult(false))
             {
@@ -93,11 +82,6 @@ namespace ApplicationLayer.Services
         }
         public ActionResult<bool> Update(ProductViewModel productViewModel)
         {
-            //var updateProductCommand = new UpdateProductCommand(
-            //    productViewModel.Product_id,
-            //    productViewModel.Name,
-            //    productViewModel.Cost
-            //    );
             var Task = _bus.SendCommand(_autoMapper.Map<UpdateProductCommand>(productViewModel));
             if (Task == Task.FromResult(false))
             {
