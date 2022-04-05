@@ -1,6 +1,7 @@
 ﻿using ApplicationLayer.Interfaces;
 using ApplicationLayer.Model;
 using ApplicationLayer.ViewModels;
+using AutoMapper;
 using Domain.Commands.ProductCommands;
 using Domain.ErrorMessages;
 using Domain.Interfaces;
@@ -18,11 +19,13 @@ namespace ApplicationLayer.Services
     {
         private readonly IProductRepository _productRepository;
         private readonly IMediatorHandler _bus;
-        public ProductService(IProductRepository productRepository,IMediatorHandler mediatorHandler)
+        private readonly IMapper _autoMapper;
+
+        public ProductService(IProductRepository productRepository,IMediatorHandler mediatorHandler,IMapper mapper)
         {
             _productRepository = productRepository;
             _bus = mediatorHandler;
-         
+            _autoMapper=mapper;
         }
         public ActionResult<List<ProductViewModel>> GetProducts()
         {
@@ -69,12 +72,12 @@ namespace ApplicationLayer.Services
 
         public ActionResult<bool> Create(ProductViewModel productViewModel)
         {
-            var createProductCommand = new CreateProductCommand(
-                productViewModel.Product_id,
-                productViewModel.Name,
-                productViewModel.Cost
-                );
-            var Task = _bus.SendCommand(createProductCommand);
+            //var createProductCommand = new CreateProductCommand(
+            //    productViewModel.Product_id,
+            //    productViewModel.Name,
+            //    productViewModel.Cost
+            //    );
+            var Task = _bus.SendCommand(_autoMapper.Map<CreateProductCommand>(productViewModel));
             if (Task == Task.FromResult(false))
             {
                 var errorResponse = new ErrorResponseModel()
@@ -88,12 +91,12 @@ namespace ApplicationLayer.Services
         }
         public ActionResult<bool> Update(ProductViewModel productViewModel)
         {
-            var updateProductCommand = new UpdateProductCommand(
-                productViewModel.Product_id,
-                productViewModel.Name,
-                productViewModel.Cost
-                );
-            var Task = _bus.SendCommand(updateProductCommand);
+            //var updateProductCommand = new UpdateProductCommand(
+            //    productViewModel.Product_id,
+            //    productViewModel.Name,
+            //    productViewModel.Cost
+            //    );
+            var Task = _bus.SendCommand(_autoMapper.Map<UpdateProductCommand>(productViewModel));
             if (Task == Task.FromResult(false))
             {
                 var errorResponse = new ErrorResponseModel()

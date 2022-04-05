@@ -1,8 +1,10 @@
 ﻿using ApplicationLayer.Interfaces;
 using ApplicationLayer.Model;
 using ApplicationLayer.ViewModels;
+using AutoMapper;
 using Domain;
 using Domain.Commands.BillCommands;
+using Domain.Commands.ProductCommands;
 using Domain.ErrorMessages;
 using Domain.Interfaces;
 using DomainCore.Bus;
@@ -19,11 +21,13 @@ namespace ApplicationLayer.Services
     {
         private readonly IBillRepository _billRepository;
         private readonly IMediatorHandler _bus;
+        private readonly IMapper _autoMapper;
 
-        public BillService(IBillRepository billRepository,IMediatorHandler mediatorHandler)
+        public BillService(IBillRepository billRepository,IMediatorHandler mediatorHandler,IMapper mapper)
         {
             _billRepository = billRepository;
             _bus = mediatorHandler;
+            _autoMapper = mapper;   
         }
         public ActionResult<List<BillViewModel>> GetBills()
         {
@@ -68,11 +72,12 @@ namespace ApplicationLayer.Services
         }
         public ActionResult<bool> Create(BillViewModel billViewModel)
         {
-            var createBillCommand = new CreateBillCommand(
-                billViewModel.Bill_number,
-                billViewModel.Total_cost,
-                billViewModel.Credit_card);
-            var Task = _bus.SendCommand(createBillCommand);
+            //var createBillCommand = new CreateBillCommand(
+            //    billViewModel.Bill_number,
+            //    billViewModel.Total_cost,
+            //    billViewModel.Credit_card);
+
+            var Task = _bus.SendCommand(_autoMapper.Map<CreateBillCommand>(billViewModel));
             if (Task == Task.FromResult(false))
             {
                 var errorResponse = new ErrorResponseModel()
@@ -86,11 +91,11 @@ namespace ApplicationLayer.Services
         }
         public ActionResult<bool> Update(BillViewModel billViewModel)
         {
-            var updateBillCommand = new UpdateBillCommand(
-                billViewModel.Bill_number,
-                billViewModel.Total_cost,
-                billViewModel.Credit_card);
-            var Task = _bus.SendCommand(updateBillCommand);
+            //var updateBillCommand = new UpdateBillCommand(
+            //    billViewModel.Bill_number,
+            //    billViewModel.Total_cost,
+            //    billViewModel.Credit_card);
+            var Task = _bus.SendCommand(_autoMapper.Map<UpdateBillCommand>(billViewModel));
             if (Task == Task.FromResult(false))
             {
                 var errorResponse = new ErrorResponseModel()
