@@ -1,5 +1,6 @@
 ﻿using ApplicationLayer.ViewModels;
 using AutoMapper;
+using Domain;
 using Domain.Commands.BillCommands;
 using Domain.Commands.ProductCommands;
 using System;
@@ -24,6 +25,8 @@ namespace ApplicationLayer.AutoMapper
               .ConstructUsing(b => new UpdateBillCommand(b.Bill_number, b.Total_cost, b.Credit_card));
             CreateMap<ProductViewModel, UpdateProductCommand>()
                 .ConstructUsing(p => new UpdateProductCommand(p.Product_id, p.Name, p.Cost));
+            //BillProductViewModel to BillProduct
+            CreateMap<BillProductViewModel, BillProduct>();
         }
     }
 }

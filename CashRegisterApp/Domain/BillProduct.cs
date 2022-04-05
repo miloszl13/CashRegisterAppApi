@@ -15,7 +15,7 @@ namespace Domain
 
         [ForeignKey("Product")]
         public int Product_id { get; set; }
-        public Product Product { get; set; }    
+        public Product Product { get; set; }
 
         public int Product_quantity { get; set; }
         public int? Products_cost { get; set; }

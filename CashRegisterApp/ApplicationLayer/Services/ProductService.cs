@@ -42,12 +42,14 @@ namespace ApplicationLayer.Services
             var result = new List<ProductViewModel>();
             foreach (var product in products)
             {
-                result.Add(new ProductViewModel
-                {
-                    Product_id = product.Product_Id,
-                    Name = product.Name,
-                    Cost = product.Cost
-                });
+                //result.Add(new ProductViewModel
+                //{
+                //    Product_id = product.Product_Id,
+                //    Name = product.Name,
+                //    Cost = product.Cost
+                //});
+                result.Add(_autoMapper.Map<ProductViewModel>(product));
+
             }
             return result;
         }

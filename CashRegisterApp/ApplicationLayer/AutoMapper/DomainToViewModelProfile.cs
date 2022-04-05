@@ -15,7 +15,7 @@ namespace ApplicationLayer.AutoMapper
         {
             CreateMap<Bill, BillViewModel>();
             CreateMap<Product,ProductViewModel>();
-            CreateMap<BillProduct, ProductViewModel>();
+            CreateMap<BillProduct, BillProductViewModel>();
         }
     }
 }
