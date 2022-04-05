@@ -40,9 +40,10 @@ namespace InversionOfControl
             services.AddScoped<IBillRepository, BillRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IBillProductRepository, BillProductRepository>();
-
-
+            //DbContext
             services.AddScoped<BillsDbContext>();
+            //AutoMapper
+            //services.AddScoped
         }
     }
 }

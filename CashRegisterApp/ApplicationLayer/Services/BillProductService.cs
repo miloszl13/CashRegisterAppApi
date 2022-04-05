@@ -1,6 +1,7 @@
 ﻿using ApplicationLayer.Interfaces;
 using ApplicationLayer.Model;
 using ApplicationLayer.ViewModels;
+using AutoMapper;
 using Domain;
 using Domain.ErrorMessages;
 using Domain.Interfaces;
@@ -18,12 +19,14 @@ namespace ApplicationLayer.Services
         private readonly IBillProductRepository _billProductRepository;
         private readonly IProductRepository _productRepository;
         private readonly IBillRepository _billrepository;
+        private readonly IMapper _autoMapper;
 
-        public BillProductService(IBillProductRepository billProductRepository,IProductRepository productRepository,IBillRepository billRepository)
+        public BillProductService(IBillProductRepository billProductRepository,IProductRepository productRepository,IBillRepository billRepository,IMapper mapper)
         {
             _billProductRepository=billProductRepository;
             _productRepository=productRepository;
             _billrepository=billRepository;
+            _autoMapper=mapper;
         }
         public ActionResult<List<BillProductViewModel>> GetAllBillProduct()
         {
@@ -42,13 +45,14 @@ namespace ApplicationLayer.Services
             {
                 foreach (var billproduct in billProducts)
                 {
-                    result.Add(new BillProductViewModel
-                    {
-                        Bill_number = billproduct.Bill_number,
-                        Product_id = billproduct.Product_id,
-                        Product_quantity = billproduct.Product_quantity,
-                        Products_cost = billproduct.Products_cost
-                    });
+                    //result.Add(new BillProductViewModel
+                    //{
+                    //    Bill_number = billproduct.Bill_number,
+                    //    Product_id = billproduct.Product_id,
+                    //    Product_quantity = billproduct.Product_quantity,
+                    //    Products_cost = billproduct.Products_cost
+                    //});
+                    result.Add(_autoMapper.Map<BillProductViewModel>(billproduct));
                 }
             }
             return result;
@@ -72,11 +76,12 @@ namespace ApplicationLayer.Services
                 .FirstOrDefault(x => x.Bill_number == billProductViewModel.Bill_number && x.Product_id == billProductViewModel.Product_id);
             if (billproductfromDB != null)
             {
-                int bpquantity = billproductfromDB.Product_quantity + billProductViewModel.Product_quantity;
+                int bpquantity = billproductfromDB.Product_quantity + billProductViewModel.Product_quantity;                        
                 billproductfromDB.Bill_number = billProductViewModel.Bill_number;
                 billproductfromDB.Product_id = billProductViewModel.Product_id;
                 billproductfromDB.Product_quantity = bpquantity;
                 billproductfromDB.Products_cost = (product.Cost * bpquantity);
+
 
                 var bill = _billrepository.GetBillById(billproductfromDB.Bill_number);
                 if (bill.Total_cost + billproductfromDB.Products_cost > 20000)
@@ -96,14 +101,20 @@ namespace ApplicationLayer.Services
                 }
             }
             //if billproduct doesnt exist in db create new
+         
+            //DODAO
+            billProductViewModel.Products_cost = product.Cost * billProductViewModel.Product_quantity;
+            //DODAO 
+          
 
-            var billProduct = new BillProduct()
-            {
-                Bill_number = billProductViewModel.Bill_number,
-                Product_id = billProductViewModel.Product_id,
-                Product_quantity = billProductViewModel.Product_quantity,
-                Products_cost = (product.Cost * billProductViewModel.Product_quantity)
-            };
+            var billProduct = _autoMapper.Map<BillProduct>(billProductViewModel);
+            //var billProduct = new BillProduct()
+            //{
+            //    Bill_number = billProductViewModel.Bill_number,
+            //    Product_id = billProductViewModel.Product_id,
+            //    Product_quantity = billProductViewModel.Product_quantity,
+            //    Products_cost = (product.Cost * billProductViewModel.Product_quantity)
+            //};
             var billDb = _billrepository.GetBillById(billProductViewModel.Bill_number);
             if (billDb.Total_cost + billProduct.Products_cost > 20000)
             {

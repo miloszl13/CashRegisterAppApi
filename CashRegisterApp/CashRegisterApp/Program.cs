@@ -1,3 +1,4 @@
+using CashRegisterApp.Configurations;
 using FluentValidation.AspNetCore;
 using InfrastructureData;
 using InversionOfControl;
@@ -30,6 +31,10 @@ builder.Services.AddDbContext<BillsDbContext>(options => options.UseNpgsql(
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 builder.Services.AddMediatR(typeof(Program));
+
+//AUTOMAPPER
+builder.Services.RegisterAutoMapper();
+
 RegisterService(builder.Services);
 
 var app = builder.Build();
@@ -39,6 +44,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+   
+
 }
 
 app.UseHttpsRedirection();
