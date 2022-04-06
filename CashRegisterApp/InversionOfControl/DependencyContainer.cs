@@ -1,11 +1,13 @@
 ﻿using ApplicationLayer.Interfaces;
 using ApplicationLayer.Services;
+using ApplicationLayer.ViewModels;
 using Domain.CommandHandlers.BillCommandHandlers;
 using Domain.CommandHandlers.ProductCommandHandlers;
 using Domain.Commands.BillCommands;
 using Domain.Commands.ProductCommands;
 using Domain.Interfaces;
 using DomainCore.Bus;
+using FluentValidation;
 using InfraBus;
 using InfrastructureData;
 using InfrastructureData.Repositories;
@@ -42,8 +44,8 @@ namespace InversionOfControl
             services.AddScoped<IBillProductRepository, BillProductRepository>();
             //DbContext
             services.AddScoped<BillsDbContext>();
-            //AutoMapper
-            //services.AddScoped
+            //Validation
+            //services.AddTransient<IValidator<BillViewModel>, BillViewModelValidation>();
         }
     }
 }

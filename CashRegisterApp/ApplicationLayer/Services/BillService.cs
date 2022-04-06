@@ -143,32 +143,44 @@ namespace ApplicationLayer.Services
                 };
                 return new NotFoundObjectResult(errorResponse);
 
-            }
-            //bill.Credit_card = cardNumber.ToString();
-            //_billRepository.Update(bill, BillNumber);
-            var billvm = _autoMapper.Map<BillViewModel>(bill);
-            billvm.Credit_card = cardNumber.ToString();
-            var Task = _bus.SendCommand(_autoMapper.Map<UpdateBillCommand>(billvm));
-            if (Task == Task.FromResult(false))
+            }           
+            //validate creditcard
+            var validator = new HelperMethodsForValidation();
+            var isValidCreditCard=validator.isValidCreditCard(cardNumber);
+            if (isValidCreditCard)
             {
-                var errorResponse = new ErrorResponseModel()
+                var billvm = _autoMapper.Map<BillViewModel>(bill);
+                billvm.Credit_card = cardNumber.ToString();
+                var Task = _bus.SendCommand(_autoMapper.Map<UpdateBillCommand>(billvm));
+                if (Task == Task.FromResult(false))
                 {
-                    ErrorMessage = BillErrorMessages.bill_not_exist,
-                    StatusCode = System.Net.HttpStatusCode.BadRequest
-                };
-                return new BadRequestObjectResult(errorResponse);
+                    var errorResponse1 = new ErrorResponseModel()
+                    {
+                        ErrorMessage = BillErrorMessages.bill_not_exist,
+                        StatusCode = System.Net.HttpStatusCode.NotFound
+                    };
+                    return new NotFoundObjectResult(errorResponse1);
+                }
+
+                List<BillProductViewModel> billProducts = new List<BillProductViewModel>();
+                foreach (BillProduct bp in bill.Bill_Products)
+                {
+                    billProducts.Add(_autoMapper.Map<BillProductViewModel>(bp));
+                }
+                var result = _autoMapper.Map<BillViewModel>(bill);
+                return result;
             }
-           
-
-
-            List<BillProductViewModel> billProducts = new List<BillProductViewModel>();
-            foreach (BillProduct bp in bill.Bill_Products)
+            else
             {
-                billProducts.Add(_autoMapper.Map<BillProductViewModel>(bp));
+                var errorResponse2 = new ErrorResponseModel()
+                {
+                    ErrorMessage = BillErrorMessages.NotValidCC,
+                    StatusCode = System.Net.HttpStatusCode.NotFound
+                };
+                return new BadRequestObjectResult(errorResponse2);
             }
-            var result = _autoMapper.Map<BillViewModel>(bill);
-            return result;
-
+            
+            
         }
 
     }
