@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashRegisterApp", "CashRegisterApp\CashRegisterApp.csproj", "{A549C127-7EE1-4645-8083-34CEDCC34B7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CashRegisterApp", "CashRegisterApp\CashRegisterApp.csproj", "{A549C127-7EE1-4645-8083-34CEDCC34B7C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{54DE19A7-270F-4C8A-B8F4-1B7E7022261B}"
 EndProject
@@ -17,17 +17,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DomainCore", "DomainCore", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InfraBus", "InfraBus", "{E660A05F-74E7-479A-BEF8-CEC3CA76BF31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationLayer", "ApplicationLayer\ApplicationLayer.csproj", "{122C255C-1C71-4B17-BB8A-5C7D91FF1C81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationLayer", "ApplicationLayer\ApplicationLayer.csproj", "{122C255C-1C71-4B17-BB8A-5C7D91FF1C81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{A89CA36F-7A16-4395-8E3D-ED514C4C5B1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{A89CA36F-7A16-4395-8E3D-ED514C4C5B1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainCore", "DomainCore\DomainCore.csproj", "{B2052865-4964-4C19-94CD-6F343A814B67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainCore", "DomainCore\DomainCore.csproj", "{B2052865-4964-4C19-94CD-6F343A814B67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfraBus", "InfraBus\InfraBus.csproj", "{408916E3-24E0-4758-A0F6-F3F2C42AEEA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfraBus", "InfraBus\InfraBus.csproj", "{408916E3-24E0-4758-A0F6-F3F2C42AEEA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfrastructureData", "InfrastructureData\InfrastructureData.csproj", "{235A7258-3F39-4594-9B91-00774FAEAA68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfrastructureData", "InfrastructureData\InfrastructureData.csproj", "{235A7258-3F39-4594-9B91-00774FAEAA68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InversionOfControl", "InversionOfControl\InversionOfControl.csproj", "{DEFDC303-9BB5-4D0C-A1AF-0CC719DB9F56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InversionOfControl", "InversionOfControl\InversionOfControl.csproj", "{DEFDC303-9BB5-4D0C-A1AF-0CC719DB9F56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

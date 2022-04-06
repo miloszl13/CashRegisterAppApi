@@ -25,6 +25,7 @@ builder.Services.AddControllers().AddFluentValidation(options =>
     options.ImplicitlyValidateRootCollectionElements = true;
     // Automatic registration of validators in assembly
     options.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
 });
 //DbContext
 builder.Services.AddDbContext<BillsDbContext>(options => options.UseNpgsql(

@@ -42,9 +42,6 @@ namespace CashRegisterApp.Controllers
             return deletedBill;
         }
         //get bill by id
-        //
-        //
-        //
         [HttpGet("GetBillById{id}")]
         public ActionResult<BillViewModel> GetBillById([FromRoute] string id)
         {

@@ -51,22 +51,8 @@ namespace ApplicationLayer.Services
 
                 foreach(BillProduct bp in billfromDb.Bill_Products)
                 {
-                    //billproducts.Add(new BillProductViewModel
-                    //{
-                    //    Bill_number = bp.Bill_number,
-                    //    Product_id = bp.Product_id,
-                    //    Product_quantity = bp.Product_quantity,
-                    //    Products_cost = bp.Products_cost
-                    //});
                     billproducts.Add(_autoMapper.Map<BillProductViewModel>(bp));
                 }
-                //result.Add(new BillViewModel
-                //{
-                //    Bill_number = bill.Bill_number,
-                //    Total_cost = bill.Total_cost,
-                //    Credit_card = bill.Credit_card,
-                //    Bill_Products = billproducts
-                //});
                 result.Add(_autoMapper.Map<BillViewModel>(bill));
                     
             }
@@ -74,11 +60,6 @@ namespace ApplicationLayer.Services
         }
         public ActionResult<bool> Create(BillViewModel billViewModel)
         {
-            //var createBillCommand = new CreateBillCommand(
-            //    billViewModel.Bill_number,
-            //    billViewModel.Total_cost,
-            //    billViewModel.Credit_card);
-
             var Task = _bus.SendCommand(_autoMapper.Map<CreateBillCommand>(billViewModel));
             if (Task == Task.FromResult(false))
             {
@@ -93,10 +74,6 @@ namespace ApplicationLayer.Services
         }
         public ActionResult<bool> Update(BillViewModel billViewModel)
         {
-            //var updateBillCommand = new UpdateBillCommand(
-            //    billViewModel.Bill_number,
-            //    billViewModel.Total_cost,
-            //    billViewModel.Credit_card);
             var Task = _bus.SendCommand(_autoMapper.Map<UpdateBillCommand>(billViewModel));
             if (Task == Task.FromResult(false))
             {
@@ -149,23 +126,9 @@ namespace ApplicationLayer.Services
             List<BillProductViewModel> billProducts = new List<BillProductViewModel>();
             foreach (BillProduct bp in billfromdb.Bill_Products)
             {
-                //billProducts.Add(new BillProductViewModel
-                //{
-                //    Bill_number = bp.Bill_number,
-                //    Product_id = bp.Product_id,
-                //    Product_quantity = bp.Product_quantity,
-                //    Products_cost = bp.Products_cost
-                //});
                 billProducts.Add(_autoMapper.Map<BillProductViewModel>(bp));
             }
             var result= _autoMapper.Map<BillViewModel>(billfromdb);
-            //var result = new BillViewModel
-            //{
-            //    Bill_number = billfromdb.Bill_number,
-            //    Total_cost = billfromdb.Total_cost,
-            //    Credit_card = billfromdb.Credit_card,
-            //    Bill_Products = billProducts
-            //};
             return result;
         }
         public ActionResult<BillViewModel> AddCreditCard(string cardNumber, string BillNumber)
@@ -180,46 +143,44 @@ namespace ApplicationLayer.Services
                 };
                 return new NotFoundObjectResult(errorResponse);
 
-            }
-            //bill.Credit_card = cardNumber.ToString();
-            //_billRepository.Update(bill, BillNumber);
-            var billvm = _autoMapper.Map<BillViewModel>(bill);
-            billvm.Credit_card = cardNumber.ToString();
-            var Task = _bus.SendCommand(_autoMapper.Map<UpdateBillCommand>(billvm));
-            if (Task == Task.FromResult(false))
+            }           
+            //validate creditcard
+            var validator = new HelperMethodsForValidation();
+            var isValidCreditCard=validator.isValidCreditCard(cardNumber);
+            if (isValidCreditCard)
             {
-                var errorResponse = new ErrorResponseModel()
+                var billvm = _autoMapper.Map<BillViewModel>(bill);
+                billvm.Credit_card = cardNumber.ToString();
+                var Task = _bus.SendCommand(_autoMapper.Map<UpdateBillCommand>(billvm));
+                if (Task == Task.FromResult(false))
                 {
-                    ErrorMessage = BillErrorMessages.bill_not_exist,
-                    StatusCode = System.Net.HttpStatusCode.BadRequest
-                };
-                return new BadRequestObjectResult(errorResponse);
+                    var errorResponse1 = new ErrorResponseModel()
+                    {
+                        ErrorMessage = BillErrorMessages.bill_not_exist,
+                        StatusCode = System.Net.HttpStatusCode.NotFound
+                    };
+                    return new NotFoundObjectResult(errorResponse1);
+                }
+
+                List<BillProductViewModel> billProducts = new List<BillProductViewModel>();
+                foreach (BillProduct bp in bill.Bill_Products)
+                {
+                    billProducts.Add(_autoMapper.Map<BillProductViewModel>(bp));
+                }
+                var result = _autoMapper.Map<BillViewModel>(bill);
+                return result;
             }
-           
-
-
-            List<BillProductViewModel> billProducts = new List<BillProductViewModel>();
-            foreach (BillProduct bp in bill.Bill_Products)
+            else
             {
-                //billProducts.Add(new BillProductViewModel
-                //{
-                //    Bill_number = bp.Bill_number,
-                //    Product_id = bp.Product_id,
-                //    Product_quantity = bp.Product_quantity,
-                //    Products_cost = bp.Products_cost
-                //});
-                billProducts.Add(_autoMapper.Map<BillProductViewModel>(bp));
+                var errorResponse2 = new ErrorResponseModel()
+                {
+                    ErrorMessage = BillErrorMessages.NotValidCC,
+                    StatusCode = System.Net.HttpStatusCode.NotFound
+                };
+                return new BadRequestObjectResult(errorResponse2);
             }
-            var result = _autoMapper.Map<BillViewModel>(bill);
-            //var result = new BillViewModel
-            //{
-            //    Bill_number = bill.Bill_number,
-            //    Total_cost = bill.Total_cost,
-            //    Credit_card = bill.Credit_card,
-            //    Bill_Products = billProducts
-            //};
-            return result;
-
+            
+            
         }
 
     }

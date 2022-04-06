@@ -44,14 +44,7 @@ namespace ApplicationLayer.Services
             if (billProducts != null)
             {
                 foreach (var billproduct in billProducts)
-                {
-                    //result.Add(new BillProductViewModel
-                    //{
-                    //    Bill_number = billproduct.Bill_number,
-                    //    Product_id = billproduct.Product_id,
-                    //    Product_quantity = billproduct.Product_quantity,
-                    //    Products_cost = billproduct.Products_cost
-                    //});
+                {                   
                     result.Add(_autoMapper.Map<BillProductViewModel>(billproduct));
                 }
             }
@@ -101,20 +94,9 @@ namespace ApplicationLayer.Services
                 }
             }
             //if billproduct doesnt exist in db create new
-         
-            //DODAO
-            billProductViewModel.Products_cost = product.Cost * billProductViewModel.Product_quantity;
-            //DODAO 
-          
-
+            billProductViewModel.Products_cost = product.Cost * billProductViewModel.Product_quantity; 
+            
             var billProduct = _autoMapper.Map<BillProduct>(billProductViewModel);
-            //var billProduct = new BillProduct()
-            //{
-            //    Bill_number = billProductViewModel.Bill_number,
-            //    Product_id = billProductViewModel.Product_id,
-            //    Product_quantity = billProductViewModel.Product_quantity,
-            //    Products_cost = (product.Cost * billProductViewModel.Product_quantity)
-            //};
             var billDb = _billrepository.GetBillById(billProductViewModel.Bill_number);
             if (billDb.Total_cost + billProduct.Products_cost > 20000)
             {
