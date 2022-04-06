@@ -29,6 +29,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfrastructureData", "Infra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InversionOfControl", "InversionOfControl\InversionOfControl.csproj", "{DEFDC303-9BB5-4D0C-A1AF-0CC719DB9F56}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{2A855466-3705-4A73-BBA6-DFD62586C4C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashRegisterApp.UnitTests", "CashRegisterApp.UnitTests\CashRegisterApp.UnitTests.csproj", "{3D78D0DB-51E5-44E2-8AB9-F9F62860FC67}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,10 @@ Global
 		{DEFDC303-9BB5-4D0C-A1AF-0CC719DB9F56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEFDC303-9BB5-4D0C-A1AF-0CC719DB9F56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEFDC303-9BB5-4D0C-A1AF-0CC719DB9F56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D78D0DB-51E5-44E2-8AB9-F9F62860FC67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D78D0DB-51E5-44E2-8AB9-F9F62860FC67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D78D0DB-51E5-44E2-8AB9-F9F62860FC67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D78D0DB-51E5-44E2-8AB9-F9F62860FC67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +82,7 @@ Global
 		{408916E3-24E0-4758-A0F6-F3F2C42AEEA3} = {E660A05F-74E7-479A-BEF8-CEC3CA76BF31}
 		{235A7258-3F39-4594-9B91-00774FAEAA68} = {6A68B14C-7FC3-42F0-81E2-44288F33B838}
 		{DEFDC303-9BB5-4D0C-A1AF-0CC719DB9F56} = {EE4F01F8-FAE4-44AC-B3B4-F319D76CE75B}
+		{3D78D0DB-51E5-44E2-8AB9-F9F62860FC67} = {2A855466-3705-4A73-BBA6-DFD62586C4C8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B9A827F4-4B1F-4E6E-B68F-BEFEFE7DA97A}
