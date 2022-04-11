@@ -15,7 +15,7 @@ namespace CashRegisterApp.Controllers
         }
         //get all products
         [HttpGet]
-        public ActionResult<List<ProductViewModel>> GetBills()
+        public ActionResult<List<ProductViewModel>> GetProducts()
         {
             var productsDb = _productService.GetProducts();
             return productsDb;
