@@ -71,9 +71,9 @@ namespace CashRegisterApp.UnitTests.ControllerTests
                 StatusCode = System.Net.HttpStatusCode.BadRequest
             };
         }
-        //Tests for GetBills method
+        //Tests for GetProducts method
         [Test]
-        public void GetProducts_IfProductDbIsNotEmpty_ReturnsProducts()
+        public void GetProducts_IfProductDbIsNotEmpty_ReturnsProductViewModels()
         {
             //arrange
             _service.Setup(service => service.GetProducts()).Returns(ProductsVMS);

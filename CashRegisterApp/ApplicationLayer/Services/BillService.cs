@@ -175,7 +175,7 @@ namespace ApplicationLayer.Services
                 var errorResponse2 = new ErrorResponseModel()
                 {
                     ErrorMessage = BillErrorMessages.NotValidCC,
-                    StatusCode = System.Net.HttpStatusCode.NotFound
+                    StatusCode = System.Net.HttpStatusCode.BadRequest
                 };
                 return new BadRequestObjectResult(errorResponse2);
             }
