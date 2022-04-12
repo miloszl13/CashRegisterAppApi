@@ -20,7 +20,7 @@ namespace ApplicationLayer.Services
             {
                 var errorResponse = new ErrorResponseModel()
                 {
-                    ErrorMessage = CurrencyExchangeErrorMessages.invalid_currency,
+                    ErrorMessage = CurrencyExchangeErrorMessages.invalidCurrency,
                     StatusCode = System.Net.HttpStatusCode.BadRequest
                 };
                 return new BadRequestObjectResult(errorResponse);
@@ -31,7 +31,7 @@ namespace ApplicationLayer.Services
             {
                 var errorResponse = new ErrorResponseModel()
                 {
-                    ErrorMessage = CurrencyExchangeErrorMessages.invalid_currency,
+                    ErrorMessage = CurrencyExchangeErrorMessages.invalidCurrency,
                     StatusCode = System.Net.HttpStatusCode.BadRequest
                 };
                 return new BadRequestObjectResult(errorResponse);
@@ -41,7 +41,7 @@ namespace ApplicationLayer.Services
             {
                 var errorResponse = new ErrorResponseModel()
                 {
-                    ErrorMessage = CurrencyExchangeErrorMessages.invalid_amount,
+                    ErrorMessage = CurrencyExchangeErrorMessages.invalidAmount,
                     StatusCode = System.Net.HttpStatusCode.BadRequest
                 };
                 return new BadRequestObjectResult(errorResponse);

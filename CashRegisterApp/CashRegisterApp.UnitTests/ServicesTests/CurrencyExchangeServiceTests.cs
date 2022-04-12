@@ -49,12 +49,12 @@ namespace CashRegisterApp.UnitTests.ServicesTests
             //error
             errorAmountResponse = new ErrorResponseModel()
             {
-                ErrorMessage = CurrencyExchangeErrorMessages.invalid_amount,
+                ErrorMessage = CurrencyExchangeErrorMessages.invalidAmount,
                 StatusCode = System.Net.HttpStatusCode.BadRequest
             };
             errorCurrencyResponse = new ErrorResponseModel()
             {
-                ErrorMessage = CurrencyExchangeErrorMessages.invalid_currency,
+                ErrorMessage = CurrencyExchangeErrorMessages.invalidCurrency,
                 StatusCode = System.Net.HttpStatusCode.BadRequest
             };
         }

@@ -8,7 +8,7 @@ namespace Domain.ErrorMessages
 {
     public class CurrencyExchangeErrorMessages
     {
-        public const string invalid_currency = "You did not enter the currency correctly!";
-        public const string invalid_amount = "You cant exchange amount if it is less than or ecual zero!";
+        public const string invalidCurrency = "You did not enter the currency correctly!";
+        public const string invalidAmount = "You cant exchange amount if it is less than or ecual zero!";
     }
 }

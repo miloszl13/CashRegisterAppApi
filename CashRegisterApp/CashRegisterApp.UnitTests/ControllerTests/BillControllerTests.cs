@@ -60,22 +60,22 @@ namespace CashRegisterApp.UnitTests.ControllerTests
             //ErrorResponseModels
             EmptyBillDb = new ErrorResponseModel()
             {
-                ErrorMessage = BillErrorMessages.empty_bills_db,
+                ErrorMessage = BillErrorMessages.emptyBillsDb,
                 StatusCode = System.Net.HttpStatusCode.NotFound
             };
             BillNotExist = new ErrorResponseModel()
             {
-                ErrorMessage = BillErrorMessages.bill_not_exist,
+                ErrorMessage = BillErrorMessages.billNotExist,
                 StatusCode = System.Net.HttpStatusCode.NotFound
             };
             BillAlreadyExist = new ErrorResponseModel()
             {
-                ErrorMessage = BillErrorMessages.bill_already_exist,
+                ErrorMessage = BillErrorMessages.billAlreadyExist,
                 StatusCode = System.Net.HttpStatusCode.BadRequest
             };
             InvalidCreditCard = new ErrorResponseModel()
             {
-                ErrorMessage = BillErrorMessages.NotValidCC,
+                ErrorMessage = BillErrorMessages.notValidCC,
                 StatusCode = System.Net.HttpStatusCode.BadRequest
             };
         }
@@ -171,7 +171,7 @@ namespace CashRegisterApp.UnitTests.ControllerTests
         public void GetBillById_IfBillDoesNotExist_ReturnsNotFoundObjectResult()
         {
             //arrange
-            _service.Setup(service => service.GetBillById(It.IsAny<string>())).Returns(new NotFoundObjectResult(BillNotExist));
+            _service.Setup(service => service.GetByllByBillNumber(It.IsAny<string>())).Returns(new NotFoundObjectResult(BillNotExist));
             //act
             var result = _controller.GetBillById("200000000007540220");
             //assert
@@ -181,7 +181,7 @@ namespace CashRegisterApp.UnitTests.ControllerTests
         public void GetBillById_IfBillExist_ReturnsBillViewModel()
         {
             //arrange
-            _service.Setup(service => service.GetBillById(It.IsAny<string>())).Returns(BillVM);
+            _service.Setup(service => service.GetByllByBillNumber(It.IsAny<string>())).Returns(BillVM);
             //act
             var result = _controller.GetBillById("200000000007540220");
             //assert
