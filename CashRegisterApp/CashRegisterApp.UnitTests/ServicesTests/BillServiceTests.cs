@@ -158,7 +158,7 @@ namespace CashRegisterApp.UnitTests.ServicesTests
             Bill bill = null;
             _billRepository.Setup(repo => repo.GetBillById(It.IsAny<string>())).Returns(bill);
             //act
-            var result = _service.GetBillById("200000000007540220");
+            var result = _service.GetByllByBillNumber("200000000007540220");
             //assert
             result.Result.Should().BeOfType<NotFoundObjectResult>();
         }
@@ -168,7 +168,7 @@ namespace CashRegisterApp.UnitTests.ServicesTests
             //arrange
             _billRepository.Setup(repo => repo.GetBillById(It.IsAny<string>())).Returns(Bill);
             //act
-            var result = _service.GetBillById("200000000007540220");
+            var result = _service.GetByllByBillNumber("200000000007540220");
             //assert
             result.Value.Should().BeEquivalentTo(BillVM);
         }

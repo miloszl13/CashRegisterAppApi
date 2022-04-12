@@ -57,17 +57,17 @@ namespace CashRegisterApp.UnitTests.ControllerTests
             //ErrorResponseModels
             EmptyProductDb = new ErrorResponseModel()
             {
-                ErrorMessage = ProductErrorMessages.empty_products_db,
+                ErrorMessage = ProductErrorMessages.emptyProductDb,
                 StatusCode = System.Net.HttpStatusCode.NotFound
             };
             ProductNotExist = new ErrorResponseModel()
             {
-                ErrorMessage = ProductErrorMessages.product_doesnt_exist,
+                ErrorMessage = ProductErrorMessages.productDoesNotExist,
                 StatusCode = System.Net.HttpStatusCode.NotFound
             };
             ProductAlreadyExist = new ErrorResponseModel()
             {
-                ErrorMessage = ProductErrorMessages.product_already_exist,
+                ErrorMessage = ProductErrorMessages.productAlreadyExist,
                 StatusCode = System.Net.HttpStatusCode.BadRequest
             };
         }

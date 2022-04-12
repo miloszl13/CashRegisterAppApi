@@ -35,7 +35,7 @@ namespace ApplicationLayer.Services
             {
                 var errorResponse = new ErrorResponseModel()
                 {
-                    ErrorMessage = BillProductErrorMessages.empty_billsproducts_db,
+                    ErrorMessage = BillProductErrorMessages.emptyBillProductDb,
                     StatusCode = System.Net.HttpStatusCode.NotFound
                 };
                 return new NotFoundObjectResult(errorResponse);
@@ -58,7 +58,7 @@ namespace ApplicationLayer.Services
             {
                 var errorResponse = new ErrorResponseModel()
                 {
-                    ErrorMessage = ProductErrorMessages.product_doesnt_exist,
+                    ErrorMessage = ProductErrorMessages.productDoesNotExist,
                     StatusCode = System.Net.HttpStatusCode.NotFound
                 };
                 return new NotFoundObjectResult(errorResponse);
@@ -81,7 +81,7 @@ namespace ApplicationLayer.Services
                 {
                     var errorResponse = new ErrorResponseModel()
                     {
-                        ErrorMessage = BillErrorMessages.OverCostLimit,
+                        ErrorMessage = BillErrorMessages.overcostLimit,
                         StatusCode = System.Net.HttpStatusCode.BadRequest
                     };
                     return new BadRequestObjectResult(errorResponse);
@@ -102,7 +102,7 @@ namespace ApplicationLayer.Services
             {
                 var errorResponse = new ErrorResponseModel()
                 {
-                    ErrorMessage = BillErrorMessages.OverCostLimit,
+                    ErrorMessage = BillErrorMessages.overcostLimit,
                     StatusCode = System.Net.HttpStatusCode.BadRequest
                 };
                 return new BadRequestObjectResult(errorResponse);
@@ -126,7 +126,7 @@ namespace ApplicationLayer.Services
             {
                 var errorResponse = new ErrorResponseModel()
                 {
-                    ErrorMessage = BillProductErrorMessages.bill_product_not_exist,
+                    ErrorMessage = BillProductErrorMessages.billProductNotExist,
                     StatusCode = System.Net.HttpStatusCode.NotFound
                 };
                 return new NotFoundObjectResult(errorResponse);
@@ -142,7 +142,7 @@ namespace ApplicationLayer.Services
             {
                 var errorResponse = new ErrorResponseModel()
                 {
-                    ErrorMessage = BillProductErrorMessages.too_many_products,
+                    ErrorMessage = BillProductErrorMessages.tooManyProducts,
                     StatusCode = System.Net.HttpStatusCode.BadRequest
                 };
                 return new BadRequestObjectResult(errorResponse);
@@ -155,7 +155,7 @@ namespace ApplicationLayer.Services
                 {
                     var errorResponse = new ErrorResponseModel()
                     {
-                        ErrorMessage = ProductErrorMessages.product_doesnt_exist,
+                        ErrorMessage = ProductErrorMessages.productDoesNotExist,
                         StatusCode = System.Net.HttpStatusCode.NotFound
                     };
                     return new NotFoundObjectResult(errorResponse);

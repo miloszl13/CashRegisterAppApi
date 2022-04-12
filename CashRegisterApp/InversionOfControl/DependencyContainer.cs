@@ -44,8 +44,7 @@ namespace InversionOfControl
             services.AddScoped<IBillProductRepository, BillProductRepository>();
             //DbContext
             services.AddScoped<BillsDbContext>();
-            //Validation
-            //services.AddTransient<IValidator<BillViewModel>, BillViewModelValidation>();
+            
         }
     }
 }

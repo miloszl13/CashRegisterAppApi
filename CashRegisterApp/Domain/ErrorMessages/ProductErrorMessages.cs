@@ -8,9 +8,9 @@ namespace Domain.ErrorMessages
 {
     public class ProductErrorMessages
     {
-        public const string empty_products_db = "There are 0 products in database!";
-        public const string product_doesnt_exist = "Product with that id doesnt exist!";
-        public const string product_already_exist = "Product with that id already exist!";
+        public const string emptyProductDb = "There are 0 products in database!";
+        public const string productDoesNotExist = "Product with that id doesnt exist!";
+        public const string productAlreadyExist = "Product with that id already exist!";
 
     }
 }

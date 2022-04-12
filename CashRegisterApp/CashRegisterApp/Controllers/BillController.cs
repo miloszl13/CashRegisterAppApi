@@ -45,7 +45,7 @@ namespace CashRegisterApp.Controllers
         [HttpGet("GetBillById{id}")]
         public ActionResult<BillViewModel> GetBillById([FromRoute] string id)
         {
-            var billFromDb = _billService.GetBillById(id);
+            var billFromDb = _billService.GetByllByBillNumber(id);
             return billFromDb;
         }
         //CREDIT CARD

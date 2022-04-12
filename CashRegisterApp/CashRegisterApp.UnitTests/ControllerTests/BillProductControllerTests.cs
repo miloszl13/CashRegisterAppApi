@@ -54,27 +54,27 @@ namespace CashRegisterApp.UnitTests.ControllerTests
             //ErrorResponseModels
             EmptyBillProductDb = new ErrorResponseModel()
             {
-                ErrorMessage = BillProductErrorMessages.empty_billsproducts_db,
+                ErrorMessage = BillProductErrorMessages.emptyBillProductDb,
                 StatusCode = System.Net.HttpStatusCode.NotFound
             };
             ProductNotExist = new ErrorResponseModel()
             {
-                ErrorMessage = ProductErrorMessages.product_doesnt_exist,
+                ErrorMessage = ProductErrorMessages.productDoesNotExist,
                 StatusCode = System.Net.HttpStatusCode.NotFound
             };
             OverCostLimit = new ErrorResponseModel()
             {
-                ErrorMessage = BillErrorMessages.OverCostLimit,
+                ErrorMessage = BillErrorMessages.overcostLimit,
                 StatusCode = System.Net.HttpStatusCode.NotFound
             };
             BillProductNotExist = new ErrorResponseModel()
             {
-                ErrorMessage = BillProductErrorMessages.bill_product_not_exist,
+                ErrorMessage = BillProductErrorMessages.billProductNotExist,
                 StatusCode = System.Net.HttpStatusCode.NotFound
             };
             TooManyProducts = new ErrorResponseModel()
             {
-                ErrorMessage = BillProductErrorMessages.too_many_products,
+                ErrorMessage = BillProductErrorMessages.tooManyProducts,
                 StatusCode = System.Net.HttpStatusCode.NotFound
             };
         }

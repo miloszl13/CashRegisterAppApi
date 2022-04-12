@@ -37,7 +37,7 @@ namespace ApplicationLayer.Services
             {
                 var errorResponse = new ErrorResponseModel()
                 {
-                    ErrorMessage = BillErrorMessages.empty_bills_db,
+                    ErrorMessage = BillErrorMessages.emptyBillsDb,
                     StatusCode = System.Net.HttpStatusCode.NotFound
                 };
                 return new NotFoundObjectResult(errorResponse); 
@@ -65,7 +65,7 @@ namespace ApplicationLayer.Services
             {
                 var errorResponse = new ErrorResponseModel()
                 {
-                    ErrorMessage = BillErrorMessages.bill_already_exist,
+                    ErrorMessage = BillErrorMessages.billAlreadyExist,
                     StatusCode = System.Net.HttpStatusCode.BadRequest
                 };
                 return new BadRequestObjectResult(errorResponse);
@@ -79,7 +79,7 @@ namespace ApplicationLayer.Services
             {
                 var errorResponse = new ErrorResponseModel()
                 {
-                    ErrorMessage = BillErrorMessages.bill_not_exist,
+                    ErrorMessage = BillErrorMessages.billNotExist,
                     StatusCode = System.Net.HttpStatusCode.NotFound
                 };
                 return new NotFoundObjectResult(errorResponse);
@@ -97,7 +97,7 @@ namespace ApplicationLayer.Services
             {
                 var errorResponse = new ErrorResponseModel()
                 {
-                    ErrorMessage = BillErrorMessages.bill_not_exist,
+                    ErrorMessage = BillErrorMessages.billNotExist,
                     StatusCode = System.Net.HttpStatusCode.NotFound
                 };
                 return new NotFoundObjectResult(errorResponse);
@@ -108,7 +108,7 @@ namespace ApplicationLayer.Services
 
         }
         //GET BILL BY ID
-        public ActionResult<BillViewModel> GetBillById(string id)
+        public ActionResult<BillViewModel> GetByllByBillNumber(string id)
         {
             var billfromdb = _billRepository.GetBillById(id);
 
@@ -116,7 +116,7 @@ namespace ApplicationLayer.Services
             {
                 var errorResponse = new ErrorResponseModel()
                 {
-                    ErrorMessage = BillErrorMessages.bill_not_exist,
+                    ErrorMessage = BillErrorMessages.billNotExist,
                     StatusCode = System.Net.HttpStatusCode.NotFound
                 };
                 return new NotFoundObjectResult(errorResponse);
@@ -138,7 +138,7 @@ namespace ApplicationLayer.Services
             {
                 var errorResponse = new ErrorResponseModel()
                 {
-                    ErrorMessage = BillErrorMessages.bill_not_exist,
+                    ErrorMessage = BillErrorMessages.billNotExist,
                     StatusCode = System.Net.HttpStatusCode.NotFound
                 };
                 return new NotFoundObjectResult(errorResponse);
@@ -156,7 +156,7 @@ namespace ApplicationLayer.Services
                 {
                     var errorResponse1 = new ErrorResponseModel()
                     {
-                        ErrorMessage = BillErrorMessages.bill_not_exist,
+                        ErrorMessage = BillErrorMessages.billNotExist,
                         StatusCode = System.Net.HttpStatusCode.NotFound
                     };
                     return new NotFoundObjectResult(errorResponse1);
@@ -174,7 +174,7 @@ namespace ApplicationLayer.Services
             {
                 var errorResponse2 = new ErrorResponseModel()
                 {
-                    ErrorMessage = BillErrorMessages.NotValidCC,
+                    ErrorMessage = BillErrorMessages.notValidCC,
                     StatusCode = System.Net.HttpStatusCode.BadRequest
                 };
                 return new BadRequestObjectResult(errorResponse2);
