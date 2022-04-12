@@ -82,9 +82,9 @@ namespace ApplicationLayer.Services
                     var errorResponse = new ErrorResponseModel()
                     {
                         ErrorMessage = BillErrorMessages.OverCostLimit,
-                        StatusCode = System.Net.HttpStatusCode.NotFound
+                        StatusCode = System.Net.HttpStatusCode.BadRequest
                     };
-                    return new NotFoundObjectResult(errorResponse);
+                    return new BadRequestObjectResult(errorResponse);
                 }
                 else
                 {
@@ -103,7 +103,7 @@ namespace ApplicationLayer.Services
                 var errorResponse = new ErrorResponseModel()
                 {
                     ErrorMessage = BillErrorMessages.OverCostLimit,
-                    StatusCode = System.Net.HttpStatusCode.NotFound
+                    StatusCode = System.Net.HttpStatusCode.BadRequest
                 };
                 return new BadRequestObjectResult(errorResponse);
 
@@ -143,9 +143,9 @@ namespace ApplicationLayer.Services
                 var errorResponse = new ErrorResponseModel()
                 {
                     ErrorMessage = BillProductErrorMessages.too_many_products,
-                    StatusCode = System.Net.HttpStatusCode.NotFound
+                    StatusCode = System.Net.HttpStatusCode.BadRequest
                 };
-                return new NotFoundObjectResult(errorResponse);
+                return new BadRequestObjectResult(errorResponse);
 
             }
             else
@@ -155,7 +155,7 @@ namespace ApplicationLayer.Services
                 {
                     var errorResponse = new ErrorResponseModel()
                     {
-                        ErrorMessage = BillProductErrorMessages.bill_product_not_exist,
+                        ErrorMessage = ProductErrorMessages.product_doesnt_exist,
                         StatusCode = System.Net.HttpStatusCode.NotFound
                     };
                     return new NotFoundObjectResult(errorResponse);
