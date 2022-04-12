@@ -118,7 +118,7 @@ namespace CashRegisterApp.UnitTests.ServicesTests
             result.Value.Should().Be(true);
         }
         [Test]
-        public void Create_IfProductExist_ReturnsBadRequestObjectResult()
+        public void Create_IfProductAlreadyExistExist_ReturnsBadRequestObjectResult()
         {
             //arrange
             _mediator.Setup(med => med.SendCommand(It.IsAny<CreateProductCommand>())).Returns(Task.FromResult(false));
