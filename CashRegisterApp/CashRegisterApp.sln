@@ -31,7 +31,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InversionOfControl", "Inver
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{2A855466-3705-4A73-BBA6-DFD62586C4C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashRegisterApp.UnitTests", "CashRegisterApp.UnitTests\CashRegisterApp.UnitTests.csproj", "{3D78D0DB-51E5-44E2-8AB9-F9F62860FC67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CashRegisterApp.UnitTests", "CashRegisterApp.UnitTests\CashRegisterApp.UnitTests.csproj", "{3D78D0DB-51E5-44E2-8AB9-F9F62860FC67}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CashRegister.IntegrationTests", "test\CashRegister.IntegrationTests.csproj", "{2CC792FC-7A98-4A8C-BC35-BE6AB77BCCC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,10 @@ Global
 		{3D78D0DB-51E5-44E2-8AB9-F9F62860FC67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D78D0DB-51E5-44E2-8AB9-F9F62860FC67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D78D0DB-51E5-44E2-8AB9-F9F62860FC67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CC792FC-7A98-4A8C-BC35-BE6AB77BCCC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CC792FC-7A98-4A8C-BC35-BE6AB77BCCC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CC792FC-7A98-4A8C-BC35-BE6AB77BCCC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CC792FC-7A98-4A8C-BC35-BE6AB77BCCC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
