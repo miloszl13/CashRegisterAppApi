@@ -22,6 +22,7 @@ namespace InfrastructureData
         {
             //composite key
             modelBuilder.Entity<BillProduct>().HasKey(bp => new { bp.Bill_number, bp.Product_id });
+
         }
     }
 }
