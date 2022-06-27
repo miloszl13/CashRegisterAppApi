@@ -69,7 +69,7 @@ namespace ApplicationLayer.Services
                 .FirstOrDefault(x => x.Bill_number == billProductViewModel.Bill_number && x.Product_id == billProductViewModel.Product_id);
             if (billproductfromDB != null)
             {
-                int bpquantity = billproductfromDB.Product_quantity + billProductViewModel.Product_quantity;                        
+                int bpquantity = billproductfromDB.Product_quantity + billProductViewModel.Product_quantity;
                 billproductfromDB.Bill_number = billProductViewModel.Bill_number;
                 billproductfromDB.Product_id = billProductViewModel.Product_id;
                 billproductfromDB.Product_quantity = bpquantity;
@@ -93,27 +93,43 @@ namespace ApplicationLayer.Services
                     return true;
                 }
             }
-            //if billproduct doesnt exist in db create new
-            billProductViewModel.Products_cost = product.Cost * billProductViewModel.Product_quantity; 
-            
-            var billProduct = _autoMapper.Map<BillProduct>(billProductViewModel);
-            var billDb = _billrepository.GetBillById(billProductViewModel.Bill_number);
-            if (billDb.Total_cost + billProduct.Products_cost > 20000)
-            {
-                var errorResponse = new ErrorResponseModel()
-                {
-                    ErrorMessage = BillErrorMessages.overcostLimit,
-                    StatusCode = System.Net.HttpStatusCode.BadRequest
-                };
-                return new BadRequestObjectResult(errorResponse);
-
-            }
             else
             {
-                _billrepository.IncreaseTotalCost(billProduct.Products_cost, billProduct.Bill_number);
-                _billProductRepository.Add(billProduct);
 
-                return true;
+                //if billproduct doesnt exist in db create new
+                billProductViewModel.Products_cost = product.Cost * billProductViewModel.Product_quantity;
+
+                var billProduct = _autoMapper.Map<BillProduct>(billProductViewModel);
+                var billDb = _billrepository.GetBillById(billProductViewModel.Bill_number);
+                if (billDb != null)
+                {
+                    if (billDb.Total_cost + billProduct.Products_cost > 20000)
+                    {
+                        var errorResponse = new ErrorResponseModel()
+                        {
+                            ErrorMessage = BillErrorMessages.overcostLimit,
+                            StatusCode = System.Net.HttpStatusCode.BadRequest
+                        };
+                        return new BadRequestObjectResult(errorResponse);
+
+                    }
+                    else
+                    {
+                        _billrepository.IncreaseTotalCost(billProduct.Products_cost, billProduct.Bill_number);
+                        _billProductRepository.Add(billProduct);
+
+                        return true;
+                    }
+                }
+                else
+                {
+                    var errorResponse = new ErrorResponseModel()
+                    {
+                        ErrorMessage = BillErrorMessages.billNotExist,
+                        StatusCode = System.Net.HttpStatusCode.BadRequest
+                    };
+                    return new BadRequestObjectResult(errorResponse);
+                }
             }
         }
         public ActionResult<bool> Delete(string Bill_number, int Product_id, int quantity)

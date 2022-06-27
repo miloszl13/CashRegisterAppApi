@@ -1,11 +1,13 @@
 ﻿using ApplicationLayer.Interfaces;
 using ApplicationLayer.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Web.Http.Cors;
 
 namespace CashRegisterApp.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [EnableCors("*","*","*")]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
